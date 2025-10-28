@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Grayskull Technology - Enterprise IAM, infrastructure, and smart building solutions. SDVOSB serving government, healthcare, and commercial clients.">
+    <meta name="keywords" content="IAM, identity management, Duo Security, infrastructure, SDVOSB, government contractor, healthcare IT">
+    <meta property="og:title" content="Grayskull Technology - Infrastructure & Security Platform">
+    <meta property="og:description" content="Mission-critical infrastructure and identity security solutions">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://grayskulltech.com">
+    <title>Grayskull Technology - Infrastructure & Security Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #fafbfc;
+            --bg-tertiary: #f4f5f7;
+            --text-primary: #172b4d;
+            --text-secondary: #5e6c84;
+            --text-tertiary: #8993a4;
+            --border: #dfe1e6;
+            --accent: #0052cc;
+            --accent-hover: #0065ff;
+            --success: #00875a;
+            --warning: #ff991f;
+            --danger: #de350b;
+            --code-bg: #f4f5f7;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #0d1117;
+                --bg-secondary: #161b22;
+                --bg-tertiary: #21262d;
+                --text-primary: #e6edf3;
+                --text-secondary: #8b949e;
+                --text-tertiary: #6e7681;
+                --border: #30363d;
+                --accent: #2f81f7;
+                --accent-hover: #4493f8;
+                --success: #3fb950;
+                --warning: #d29922;
+                --danger: #f85149;
+                --code-bg: #161b22;
+            }
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+        }
+        
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 64px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent), #7c3aed);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+        }
+        
+        nav {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        nav a:hover {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+        
+        nav a.active {
+            color: var(--accent);
+            background: var(--bg-tertiary);
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+        
+        .btn-primary {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+        
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        .hero {
+            padding: 80px 24px 120px;
+            text-align: center;
+            background: var(--bg-primary);
+            position: relative;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+            line-height: 1.5;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: var(--bg-tertiary);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+        }
+        
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 64px;
+        }
+        
+        .btn-large {
+            padding: 12px 24px;
+            font-size: 16px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 24px;
+        }
+        
+        .stat-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        
+        .content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
+        }
+        
+        .section-title {
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .section-description {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+        
+        .feature-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            transition: all 0.2s;
+        }
+        
+        .feature-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 8px 24px rgba(0, 82, 204, 0.12);
+            transform: translateY(-2px);
+        }
+        
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+        
+        .feature-card h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .code-block {
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+            overflow-x: auto;
+        }
+        
+        .code-block code {
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            color: var(--text-primary);
+        }
+        
+        .table-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            margin: 32px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: var(--bg-tertiary);
+            padding: 16px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        tr:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .status-active {
+            background: rgba(63, 185, 80, 0.15);
+            color: var(--success);
+        }
+        
+        .status-pending {
+            background: rgba(255, 153, 31, 0.15);
+            color: var(--warning);
+        }
+        
+        .status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        
+        .page {
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .alert {
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin: 24px 0;
+            border-left: 4px solid;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        
+        .alert-info {
+            background: rgba(47, 129, 247, 0.1);
+            border-color: var(--accent);
+        }
+        
+        .alert-warning {
+            background: rgba(255, 153, 31, 0.1);
+            border-color: var(--warning);
+        }
+        
+        .alert-icon {
+            font-size: 20px;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            max-width: 480px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+        }
+        
+        .modal-header {
+            padding: 24px 24px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .modal-header h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .modal-subtitle {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .modal-body {
+            padding: 24px;
+        }
+        
+        .modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+        
+        .duo-branding {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 32px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            margin-bottom: 24px;
+        }
+        
+        .duo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), #7c3aed);
+            border-radius: 8px;
+        }
+        
+        .duo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 48px 24px 24px;
+            margin-top: 80px;
+        }
+        
+        .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 48px;
+            margin-bottom: 32px;
+        }
+        
+        .footer-section h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        
+        .footer-section a {
+            display: block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+            margin-bottom: 8px;
+            transition: color 0.2s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+        
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-tertiary);
+            font-size: 13px;
+        }
+        
+        @media (max-width: 768px) {
+            nav, .header-actions .btn-secondary {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            nav.mobile-active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 64px;
+                left: 0;
+                right: 0;
+                background: var(--bg-primary);
+                border-bottom: 1px solid var(--border);
+                padding: 12px;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+            
+            .hero {
+                padding: 48px 24px 80px;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo" onclick="showPage('home')">
+                <div class="logo-icon">GS</div>
+                <span>Grayskull Technology</span>
+            </a>
+            <nav id="mainNav">
+                <a href="#" onclick="showPage('home')" class="active" data-page="home">Overview</a>
+                <a href="#" onclick="showPage('about')" data-page="about">About</a>
+                <a href="#" onclick="showPage('services')" data-page="services">Services</a>
+                <a href="#" onclick="showPage('credentials')" data-page="credentials">Credentials</a>
+                <a href="#" onclick="showPage('contact')" data-page="contact">Contact</a>
+            </nav>
+            <div class="header-actions">
+                <button class="btn btn-secondary" onclick="openModal()">Employee Login</button>
+                <a href="#contact" class="btn btn-primary">Request Quote</a>
+            </div>
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        </div>
+    </header>
+
+    <div id="home" class="page active">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="badge">
+                    <span>🏆</span>
+                    Service-Disabled Veteran-Owned Small Business
+                </div>
+                <h1>Enterprise architecture built by practitioners</h1>
+                <p class="hero-subtitle">Grayskull Technology delivers mission-critical infrastructure, identity security, and smart building solutions for government contractors, healthcare systems, and commercial enterprises.</p>
+                <div class="hero-actions">
+                    <button class="btn btn-primary btn-large" onclick="showPage('services')">Explore Services</button>
+                    <button class="btn btn-secondary btn-large" onclick="showPage('about')">Learn More</button>
+                </div>
+                <div class="stats">
+                    <div class="stat-card">
+                        <span class="stat-value">17+</span>
+                        <span class="stat-label">Years Team Experience</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value">SDVOSB</span>
+                        <span class="stat-label">Service-Disabled Veteran-Owned</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value">$M+</span>
+                        <span class="stat-label">Projects Delivered</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="section-header">
+                <h2 class="section-title">Why enterprises choose Grayskull</h2>
+                <p class="section-description">Our team brings proven expertise from classified military networks, healthcare enterprise architecture, and Fortune 500 security platforms.</p>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🏢</div>
+                    <h3>Smart Building Systems</h3>
+                    <p>Low-voltage infrastructure, IoT integration, and building automation for modern facilities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔐</div>
+                    <h3>Identity & Access Management</h3>
+                    <p>Enterprise SSO, Zero Trust architecture, and comprehensive IAM solutions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📹</div>
+                    <h3>Physical Security</h3>
+                    <p>CCTV, access control, and intrusion detection systems for secure facilities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏥</div>
+                    <h3>Healthcare Infrastructure</h3>
+                    <p>Specialized support for healthcare and critical care environments.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Managed Services</h3>
+                    <p>24/7 monitoring, maintenance, and strategic consulting.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Compliance Ready</h3>
+                    <p>SAM.gov registered with SDVOSB and SWaM certifications.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="about" class="page">
+        <section class="content">
+            <div class="section-header">
+                <h2 class="section-title">About Grayskull Technology</h2>
+                <p class="section-description">Enterprise-grade solutions built by seasoned practitioners with deep experience across military, healthcare, and enterprise technology sectors.</p>
+            </div>
+
+            <div class="feature-card" style="margin-bottom: 24px;">
+                <h3>Our Foundation</h3>
+                <p style="margin-bottom: 16px;">Grayskull Technology was founded on a principle: infrastructure and security solutions should be designed by people who have operated them at scale in mission-critical environments. Our team brings proven expertise from classified military networks, healthcare enterprise architecture, and cutting-edge identity security platforms.</p>
+                
+                <div class="alert alert-info" style="margin-top: 16px;">
+                    <span class="alert-icon">🎖️</span>
+                    <div>
+                        <strong>Service-Disabled Veteran-Owned Small Business</strong><br>
+                        Grayskull Technology is proudly owned and operated as an SDVOSB, bringing military discipline, attention to detail, and mission-focused execution to every engagement.
+                    </div>
+                </div>
+            </div>
+
+            <div class="feature-card" style="margin-bottom: 24px;">
+                <h3>Our Approach</h3>
+                <p style="margin-bottom: 16px;">We don't just implement technology—we architect solutions that align with your strategic objectives while meeting operational requirements. Our team has:</p>
+                <div class="code-block">
+                    <code>
+• Managed multi-million dollar capital and operating budgets<br>
+• Designed and built enterprise data centers and colocation facilities<br>
+• Led large-scale infrastructure migrations (including federal BRAC projects)<br>
+• Architected healthcare IT systems requiring 24/7 uptime and HIPAA compliance<br>
+• Deployed identity and access management at Fortune 500 scale<br>
+• Operated classified network environments with security clearances<br>
+• Supervised technical teams in high-pressure, zero-downtime scenarios
+                    </code>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Core Competencies</h3>
+                    <p style="margin-bottom: 12px; font-weight: 600;">Identity & Access Management</p>
+                    <p style="font-size: 13px; margin-bottom: 16px;">Enterprise IAM, SSO, MFA, Zero Trust architecture, Duo Security, Okta, Azure AD</p>
+                    
+                    <p style="margin-bottom: 12px; font-weight: 600;">Infrastructure & Data Centers</p>
+                    <p style="font-size: 13px; margin-bottom: 16px;">Colocation design, enterprise networks, disaster recovery, business continuity</p>
+                    
+                    <p style="margin-bottom: 12px; font-weight: 600;">Smart Building Systems</p>
+                    <p style="font-size: 13px; margin-bottom: 16px;">BAS, HVAC controls, access control, CCTV, IoT integration, structured cabling</p>
+                    
+                    <p style="margin-bottom: 12px; font-weight: 600;">Security Operations</p>
+                    <p style="font-size: 13px;">Information assurance, classified systems, COMSEC, physical-digital convergence</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Industry Experience</h3>
+                    <p style="margin-bottom: 12px; font-weight: 600;">Military & Government</p>
+                    <p style="font-size: 13px; margin-bottom: 16px;">Classified networks, shipboard operations, BRAC support, tactical communications, security clearances</p>
+                    
+                    <p style="margin-bottom: 12px; font-weight: 600;">Healthcare</p>
+                    <p style="font-size: 13px; margin-bottom: 16px;">Enterprise architecture, HIPAA compliance, clinical systems, life-safety integration</p>
+                    
+                    <p style="margin-bottom: 12px; font-weight: 600;">Higher Education</p>
+                    <p style="font-size: 13px; margin-bottom: 16px;">Campus infrastructure, academic systems, FERPA compliance, multi-site coordination</p>
+                    
+                    <p style="margin-bottom: 12px; font-weight: 600;">Enterprise Technology</p>
+                    <p style="font-size: 13px;">Fortune 500 IAM deployments, vendor platforms, global-scale implementations</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3>Strategic Leadership</h3>
+                    <p style="margin-bottom: 12px; font-weight: 600;">Executive-Level Experience</p>
+                    <p style="font-size: 13px; margin-bottom: 16px;">Director-level strategic positions, C-suite technology roadmaps, enterprise modernization initiatives</p>
+                    
+                    <p style="margin-bottom: 12px; font-weight: 600;">Financial Management</p>
+                    <p style="font-size: 13px; margin-bottom: 16px;">Multi-million dollar budgets, capital planning, ROI analysis, vendor negotiations</p>
+                    
+                    <p style="margin-bottom: 12px; font-weight: 600;">Project Delivery</p>
+                    <p style="font-size: 13px; margin-bottom: 16px;">Large-scale infrastructure builds, cross-functional leadership, stakeholder management</p>
+                    
+                    <p style="margin-bottom: 12px; font-weight: 600;">Compliance</p>
+                    <p style="font-size: 13px;">FAR/DFARS, HIPAA, FERPA, NIST, DoD security standards</p>
+                </div>
+            </div>
+
+            <div class="feature-card" style="margin-top: 24px;">
+                <h3>Notable Projects</h3>
+                <div class="code-block">
+                    <code>
+<strong>Enterprise Data Center & Colocation Facilities</strong><br>
+Designed and built multiple data center environments including healthcare colocation<br>
+infrastructure with full power, cooling, security, and disaster recovery capabilities.<br>
+<br>
+<strong>Federal BRAC Infrastructure Migration</strong><br>
+Supported large-scale US Navy Base Realignment and Closure (BRAC) IT infrastructure<br>
+relocation, managing mission-critical systems migration with zero-downtime requirements.<br>
+<br>
+<strong>Healthcare Technology Buildouts</strong><br>
+Led enterprise technology integration for cancer centers, critical care towers, and<br>
+utility plant automation with life-safety system integration and HIPAA compliance.<br>
+<br>
+<strong>Enterprise IAM Deployments</strong><br>
+Architected and deployed identity and access management solutions for organizations<br>
+ranging from healthcare systems to Fortune 500 enterprises, including SSO, MFA, and<br>
+Zero Trust implementations.
+                    </code>
+                </div>
+            </div>
+
+            <div class="feature-card" style="margin-top: 24px;">
+                <h3>Security Clearances</h3>
+                <p style="margin-bottom: 12px;">Our team includes personnel with former security clearances who are eligible for reinstatement, enabling us to support classified government contracts and sensitive federal projects.</p>
+            </div>
+
+            <div class="feature-card" style="margin-top: 24px;">
+                <h3>Growing With Our Clients</h3>
+                <p style="margin-bottom: 12px;">As a small business, we maintain the agility to adapt quickly while delivering enterprise-grade solutions. As we grow, we're expanding our team with additional specialized talent across infrastructure, security, and intelligent building systems.</p>
+                <p style="margin-bottom: 12px;">Our SDVOSB status provides federal agencies and prime contractors with set-aside opportunities and diverse supplier credit, while our proven track record ensures projects are delivered on time, on budget, and to specification.</p>
+            </div>
+
+            <div class="alert alert-info" style="margin-top: 24px;">
+                <span class="alert-icon">💡</span>
+                <div>
+                    <strong>Partner With Us</strong><br>
+                    Whether you need strategic technology leadership, hands-on implementation expertise, or both—Grayskull Technology delivers solutions that are architecturally sound, operationally proven, and aligned with your mission objectives.
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="services" class="page">
+        <section class="content">
+            <div class="section-header">
+                <h2 class="section-title">Services & Solutions</h2>
+                <p class="section-description">End-to-end technology infrastructure for secure, scalable operations.</p>
+            </div>
+
+            <div class="feature-card" style="margin-bottom: 24px;">
+                <h3>Identity & Access Management</h3>
+                <p style="margin-bottom: 16px;">Enterprise IAM solutions designed by engineers with deep platform expertise. Our team includes practitioners who have deployed identity security at Fortune 500 scale and understand the intricacies of federated authentication, conditional access, and Zero Trust architectures.</p>
+                <div class="alert alert-info" style="margin-bottom: 16px;">
+                    <span class="alert-icon">💡</span>
+                    <div>
+                        <strong>Platform Expertise</strong><br>
+                        Our team includes engineers with direct experience at major security vendors, bringing insider knowledge of platform capabilities, deployment best practices, and access to vendor engineering resources for complex implementations.
+                    </div>
+                </div>
+                <div class="code-block">
+                    <code>
+<strong>Core IAM Services:</strong><br>
+• Duo Security implementation & federation<br>
+• Okta & Azure AD deployment & migration<br>
+• SAML/OAuth2/OIDC SSO architecture<br>
+• Role-based access control (RBAC) design<br>
+• Conditional access & adaptive authentication<br>
+• Directory integration (AD, LDAP, Google, etc.)<br>
+• MFA deployment at scale<br>
+• Zero Trust network access (ZTNA)<br>
+• Privileged access management (PAM)<br>
+<br>
+<strong>Supported Platforms:</strong><br>
+• Cisco Duo (primary expertise)<br>
+• Okta Identity Cloud<br>
+• Microsoft Entra ID (Azure AD)<br>
+• JumpCloud<br>
+• Auth0 / OneLogin<br>
+• Custom SAML/OAuth implementations
+                    </code>
+                </div>
+            </div>
+
+            <div class="feature-card" style="margin-bottom: 24px;">
+                <h3>Smart Building & Low Voltage Systems</h3>
+                <p style="margin-bottom: 16px;">Intelligent infrastructure design informed by years managing technology at healthcare systems and critical facilities. Our team understands life-safety integration, regulatory requirements, and 24/7 uptime constraints that come with mission-critical environments.</p>
+                <div class="code-block">
+                    <code>
+<strong>Infrastructure Design & Build:</strong><br>
+• Structured cabling (Cat6/Cat6A/Fiber/Coax)<br>
+• Building automation systems (BAS)<br>
+• HVAC controls & integration<br>
+• IoT sensor networks & edge computing<br>
+• Energy management systems (EMS)<br>
+• Power distribution & UPS systems<br>
+• Audio/visual systems<br>
+• Nurse call integration (healthcare)<br>
+• Life-safety system integration<br>
+<br>
+<strong>Experience Includes:</strong><br>
+• Cancer center technology buildouts<br>
+• Critical care tower infrastructure<br>
+• Utility plant automation<br>
+• Military facility modernization
+                    </code>
+                </div>
+            </div>
+
+            <div class="feature-card" style="margin-bottom: 24px;">
+                <h3>Physical Security Integration</h3>
+                <p style="margin-bottom: 16px;">Comprehensive surveillance and access control systems that integrate with your identity infrastructure. We bridge physical and logical security for true convergence.</p>
+                <div class="code-block">
+                    <code>
+<strong>Physical Security Systems:</strong><br>
+• IP camera systems (Axis, Hanwha, Milestone VMS)<br>
+• Access control platforms (HID, S2, Lenel OnGuard)<br>
+• Intrusion detection & alarming<br>
+• Visitor management systems<br>
+• License plate recognition (LPR)<br>
+• Video analytics & AI detection<br>
+<br>
+<strong>Identity Integration:</strong><br>
+• Badge/credential lifecycle management<br>
+• Integration with IAM systems (Duo, Okta, Azure AD)<br>
+• Mobile access credentials<br>
+• Biometric authentication<br>
+• Conditional physical access policies
+                    </code>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <span class="alert-icon">💡</span>
+                <div>
+                    <strong>Custom Solutions Available</strong><br>
+                    Every organization has unique requirements. Our team brings diverse experience across military, healthcare, education, and enterprise environments. Contact us for a tailored assessment and proposal.
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="credentials" class="page">
+        <section class="content">
+            <div class="section-header">
+                <h2 class="section-title">Credentials & Certifications</h2>
+                <p class="section-description">Licensed and certified for federal, state, and commercial contracting.</p>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Credential</th>
+                            <th>Authority</th>
+                            <th>Status</th>
+                            <th>Identifier</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>VA Class A Contractor</td>
+                            <td>Virginia DPOR</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                            <td>#2705XXXXXXA</td>
+                        </tr>
+                        <tr>
+                            <td>CBC License</td>
+                            <td>Virginia DPOR</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>ESI License</td>
+                            <td>Virginia DPOR</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>HIC License</td>
+                            <td>Virginia DPOR</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>MD Home Improvement</td>
+                            <td>Maryland MHIC</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>SAM.gov Registration</td>
+                            <td>GSA</td>
+                            <td><span class="status status-active">Active</span></td>
+                            <td>UEI: XXXXXXXX</td>
+                        </tr>
+                        <tr>
+                            <td>CAGE Code</td>
+                            <td>DLA</td>
+                            <td><span class="status status-active">Active</span></td>
+                            <td>XXXXX</td>
+                        </tr>
+                        <tr>
+                            <td>SDVOSB</td>
+                            <td>SBA</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>SWaM</td>
+                            <td>Virginia SBSD</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>SBR</td>
+                            <td>Maryland</td>
+                            <td><span class="status status-pending">Pending</span></td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="feature-card">
+                <h3>NAICS Codes</h3>
+                <div class="code-block">
+                    <code>
+541512 - Computer Systems Design Services<br>
+541519 - Other Computer Related Services<br>
+561621 - Security Systems Services<br>
+238210 - Electrical Contractors<br>
+236220 - Commercial Building Construction
+                    </code>
+                </div>
+            </div>
+
+            <div class="alert alert-info" style="margin-top: 24px;">
+                <span class="alert-icon">📄</span>
+                <div>
+                    <strong>Capability Statement Available</strong><br>
+                    Request our complete capability statement with past performance references, technical qualifications, and contract vehicle information.
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="contact" class="page">
+        <section class="content">
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+                <p class="section-description">Ready to discuss your infrastructure, security, or smart building needs?</p>
+            </div>
+
+            <div style="max-width: 600px; margin: 0 auto;">
+                <div class="feature-card">
+                    <h3>Contact Information</h3>
+                    <div style="margin-top: 24px;">
+                        <p style="margin-bottom: 16px;"><strong>Locations:</strong></p>
+                        <p style="margin-bottom: 12px;">📍 Chesapeake, Virginia</p>
+                        <p style="margin-bottom: 24px;">📍 Frederick, Maryland</p>
+                        
+                        <p style="margin-bottom: 16px;"><strong>Email:</strong></p>
+                        <p style="margin-bottom: 24px;">📧 info@grayskulltech.com</p>
+                        
+                        <p style="margin-bottom: 16px;"><strong>Phone:</strong></p>
+                        <p style="margin-bottom: 24px;">📞 (XXX) XXX-XXXX</p>
+                        
+                        <p style="margin-bottom: 16px;"><strong>Website:</strong></p>
+                        <p>🌐 www.grayskulltech.com</p>
+                    </div>
+                </div>
+
+                <div class="feature-card" style="margin-top: 24px;">
+                    <h3>Business Hours</h3>
+                    <div style="margin-top: 16px;">
+                        <p style="margin-bottom: 8px;"><strong>Monday - Friday:</strong> 8:00 AM - 6:00 PM EST</p>
+                        <p style="margin-bottom: 8px;"><strong>Saturday - Sunday:</strong> Emergency support available</p>
+                        <p style="margin-top: 16px; color: var(--text-secondary); font-size: 14px;">For urgent infrastructure or security issues, 24/7 emergency support is available for existing clients.</p>
+                    </div>
+                </div>
+
+                <div class="alert alert-info" style="margin-top: 24px;">
+                    <span class="alert-icon">🤝</span>
+                    <div>
+                        <strong>Government Contractors & Primes</strong><br>
+                        Interested in partnership opportunities or subcontracting? We're actively seeking teaming arrangements for federal and state contracts. Contact us to discuss capabilities and past performance.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Employee Portal</h3>
+                <p class="modal-subtitle">Secure authentication via Duo Federation</p>
+            </div>
+            <div class="modal-body">
+                <div class="duo-branding">
+                    <div class="duo-icon"></div>
+                    <div class="duo-text">DUO SSO</div>
+                </div>
+                <div class="alert alert-info">
+                    <span class="alert-icon">🔒</span>
+                    <div>
+                        <strong>Multi-Factor Authentication Required</strong><br>
+                        Employees will be redirected to Duo's secure authentication portal for verification.
+                    </div>
+                </div>
+                <button class="btn btn-primary" style="width: 100%; justify-content: center;" onclick="handleDuoLogin()">
+                    <span>🔐</span>
+                    <span>Sign In with Duo SSO</span>
+                </button>
+                <p style="text-align: center; margin-top: 16px; font-size: 13px; color: var(--text-secondary);">
+                    Protected by enterprise-grade multi-factor authentication
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Grayskull Technology LLC</h4>
+                <p>Bridging technology and construction through secure, smart infrastructure design.</p>
+                <p style="margin-top: 16px;"><strong>Service-Disabled Veteran-Owned Small Business</strong></p>
+            </div>
+            <div class="footer-section">
+                <h4>Locations</h4>
+                <p><strong>Chesapeake, VA</strong><br>Virginia Office</p>
+                <p style="margin-top: 12px;"><strong>Frederick, MD</strong><br>Maryland Office</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="#" onclick="showPage('about')">About</a>
+                <a href="#" onclick="showPage('services')">Services</a>
+                <a href="#" onclick="showPage('credentials')">Credentials</a>
+                <a href="#" onclick="showPage('contact')">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>info@grayskulltech.com</p>
+                <p>(XXX) XXX-XXXX</p>
+                <p>www.grayskulltech.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Grayskull Technology LLC is a Service-Disabled Veteran-Owned Small Business (SDVOSB) pending certification.<br>
+            Licensed Virginia Class A Contractor (CBC, ESI, HIC). Registered in SAM.gov for federal procurement.</p>
+            <p style="margin-top: 16px;">© 2025 Grayskull Technology LLC – All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+            
+            document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
+            document.querySelector(`nav a[data-page="${pageId}"]`)?.classList.add('active');
+            
+            document.getElementById('mainNav').classList.remove('mobile-active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mainNav').classList.toggle('mobile-active');
+        }
+
+        function openModal() {
+            document.getElementById('loginModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('loginModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function handleDuoLogin() {
+            alert('In production, this will redirect to:\n\nhttps://api-XXXXXXXX.duosecurity.com/oauth/v1/authorize\n\nwith your configured Duo application credentials for federated SSO authentication.');
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('loginModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && !this.onclick) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
