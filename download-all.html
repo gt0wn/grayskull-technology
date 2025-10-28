@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Download Grayskull Files</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        button:hover { background: #2563eb; }
+        .instructions {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>📥 Download Grayskull Technology Files</h1>
+    
+    <div class="instructions">
+        <h3>Instructions:</h3>
+        <ol>
+            <li>Click each button below to download the file</li>
+            <li>Save all 3 files to the same folder</li>
+            <li>Upload to Cloudflare Pages</li>
+        </ol>
+    </div>
+
+    <button onclick="downloadFile1()">Download index.html</button>
+    <button onclick="downloadFile2()">Download auth-callback.html</button>
+    <button onclick="downloadFile3()">Download employee-dashboard.html</button>
+
+    <script>
+        function downloadFile1() {
+            // You'll need to paste the index.html content here
+            alert('Please copy the index.html content from the artifact above and paste it into this script');
+        }
+        
+        function downloadFile2() {
+            alert('Please copy the auth-callback.html content from the artifact above');
+        }
+        
+        function downloadFile3() {
+            alert('Please copy the employee-dashboard.html content from the artifact above');
+        }
+    </script>
+</body>
+</html>
